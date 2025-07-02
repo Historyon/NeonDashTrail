@@ -70,8 +70,11 @@ public partial class Runner : CharacterBody2D
 
             var collisionNormal = collision.GetNormal();
 
-            if (collisionNormal.X < -0.7f && Mathf.Abs(collisionNormal.Y) < 0.3f)
+            if (collisionNormal.X < Constants.MinFrontalCollisionNormalX && 
+                Mathf.Abs(collisionNormal.Y) < Constants.MaxFrontalCollisionNormalYAbsolute)
+            {
                 return true;
+            }
         }
         
         return false;
