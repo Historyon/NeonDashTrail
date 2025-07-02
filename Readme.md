@@ -10,6 +10,15 @@ Das Spiel kombiniert schnelle, präzise Steuerung in Neon-Look und bietet eine R
 
 Dieses Projekt dient außerdem als Devlog, um den Entwicklungsprozess transparent zu machen und Einblicke in die Entwicklung eines kleinen, aber vollständigen Spiels zu geben.
 
+### Namenskonventionen
+
+- Entity
+  - Eine größere zusammenhängende Szene, welche sich aktiv im Spiel befindet (bspw. Runner)
+- Manager
+  - Verwaltet Zustände vom Spiel (bspw. MenuManager) 
+- [Connectors (Erklärung)](docs/pattern/ConnectorPattern.md)
+  - System zum einfachen Verbinden von Signalen über mehrere Komponentenebenen hinweg  
+
 ---
 
 ## Devlog
@@ -18,7 +27,7 @@ Willkommen zum Entwicklungstagebuch von **Neon Dash Trail**! Hier dokumentiere i
 
 ---
 
-## Version 0.1 - Start (2025-07-02)
+## Version 0.1 – Start (2025-07-02)
 
 - Projekt initialisiert mit Godot 4.4
 - Erste Spielfigur und Bewegung implementiert

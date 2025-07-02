@@ -1,4 +1,5 @@
 using Godot;
+using NeonDashTrail.connectors;
 
 namespace NeonDashTrail.entities;
 
@@ -26,7 +27,7 @@ public partial class Runner : CharacterBody2D
         MoveAndSlide();
         
         if (CollisionWithObstacle())
-            GD.Print("Collision with obstacle");
+            GameEventsConnectorService.RaiseBackToMainMenuEvent();
     }
 
     private Vector2 ApplySpeed(Vector2 velocity)

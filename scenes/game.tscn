@@ -1,0 +1,29 @@
+[gd_scene load_steps=7 format=3 uid="uid://btm7xs4inpk8s"]
+
+[ext_resource type="Script" uid="uid://5polvt4ujdtj" path="res://scenes/Game.cs" id="1_uwrxv"]
+[ext_resource type="PackedScene" uid="uid://d3ss5ptsjjwwk" path="res://manager/menu_manager.tscn" id="2_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://bmdw26t03o2ni" path="res://ui/menus/main_menu.tscn" id="3_iywne"]
+[ext_resource type="PackedScene" uid="uid://b40ie7mpcd4np" path="res://manager/level_manager.tscn" id="4_iywne"]
+[ext_resource type="PackedScene" uid="uid://djdtiin4166xl" path="res://levels/test_level.tscn" id="4_p57ef"]
+[ext_resource type="PackedScene" uid="uid://cctjppv5s8p10" path="res://connectors/GameEventsConnector.tscn" id="5_iywne"]
+
+[node name="Game" type="Node2D" node_paths=PackedStringArray("MenuManager")]
+script = ExtResource("1_uwrxv")
+MenuManager = NodePath("MenuManager")
+
+[node name="MenuLayer" type="CanvasLayer" parent="."]
+process_mode = 3
+layer = 2
+
+[node name="MenuManager" parent="." node_paths=PackedStringArray("MenuLayer") instance=ExtResource("2_lbhrr")]
+MainMenuScene = ExtResource("3_iywne")
+MenuLayer = NodePath("../MenuLayer")
+
+[node name="LevelManager" parent="." node_paths=PackedStringArray("ParentToConnectLevel") instance=ExtResource("4_iywne")]
+TestLevel = ExtResource("4_p57ef")
+ParentToConnectLevel = NodePath("..")
+
+[node name="GameEventsConnector" parent="." instance=ExtResource("5_iywne")]
+ConnectToEvents = 1
+
+[connection signal="QuitGame" from="GameEventsConnector" to="." method="OnQuitGame"]
