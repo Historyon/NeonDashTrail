@@ -27,6 +27,14 @@ Willkommen zum Entwicklungstagebuch von **Neon Dash Trail**! Hier dokumentiere i
 
 ---
 
+## Version 0.2 – Menüs (2025-07-03)
+
+- Haupt- und Pausenmenü implementiert
+- Spieler können während des Spiels pausieren
+- Kommunikation mithilfe Connectors zwischen entlegenen Nodes
+
+---
+
 ## Version 0.1 – Start (2025-07-02)
 
 - Projekt initialisiert mit Godot 4.4
