@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://b40ie7mpcd4np"]
+
+[ext_resource type="Script" uid="uid://bm27n8lb2vk6t" path="res://manager/LevelManager.cs" id="1_qg0xh"]
+[ext_resource type="PackedScene" uid="uid://cctjppv5s8p10" path="res://connectors/GameEventsConnector.tscn" id="2_ou5xw"]
+
+[node name="LevelManager" type="Node"]
+script = ExtResource("1_qg0xh")
+
+[node name="GameEventsConnector" parent="." instance=ExtResource("2_ou5xw")]
+ConnectToEvents = 18
+
+[connection signal="BackToMainMenu" from="GameEventsConnector" to="." method="OnBackToMainMenu"]
+[connection signal="StartGame" from="GameEventsConnector" to="." method="OnStartGame"]

@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://d3ss5ptsjjwwk"]
+
+[ext_resource type="Script" uid="uid://diletmdo80nin" path="res://manager/MenuManager.cs" id="1_44wlj"]
+[ext_resource type="PackedScene" uid="uid://cctjppv5s8p10" path="res://connectors/GameEventsConnector.tscn" id="2_icitp"]
+
+[node name="MenuManager" type="Node"]
+process_mode = 3
+script = ExtResource("1_44wlj")
+
+[node name="GameEventsConnector" parent="." instance=ExtResource("2_icitp")]
+ConnectToEvents = 30
+
+[connection signal="BackToMainMenu" from="GameEventsConnector" to="." method="OnBackToMainMenu"]
+[connection signal="PauseGame" from="GameEventsConnector" to="." method="OnPauseGame"]
+[connection signal="ResumeGame" from="GameEventsConnector" to="." method="OnResumeGame"]
+[connection signal="StartGame" from="GameEventsConnector" to="." method="OnStartGame"]

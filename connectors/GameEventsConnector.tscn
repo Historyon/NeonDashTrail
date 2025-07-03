@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://cctjppv5s8p10"]
+
+[ext_resource type="Script" uid="uid://c7wf82iml56yq" path="res://connectors/GameEventsConnector.cs" id="1_tkmb8"]
+
+[node name="GameEventsConnector" type="Node"]
+script = ExtResource("1_tkmb8")

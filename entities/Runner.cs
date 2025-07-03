@@ -1,4 +1,5 @@
 using Godot;
+using NeonDashTrail.connectors;
 
 namespace NeonDashTrail.entities;
 
@@ -7,6 +8,12 @@ public partial class Runner : CharacterBody2D
     [Export] public float Speed { get; set; } = 100.0f;
     [Export] public float Gravity { get; set; } = 800.0f;
     [Export] public float JumpForce { get; set; } = 250.0f;
+
+    public override void _Input(InputEvent @event)
+    {
+        if (@event.IsActionPressed("pause"))
+            GameEventsConnectorService.RaisePauseGameEvent();
+    }
 
     public override void _PhysicsProcess(double delta)
     {
@@ -26,7 +33,7 @@ public partial class Runner : CharacterBody2D
         MoveAndSlide();
         
         if (CollisionWithObstacle())
-            GD.Print("Collision with obstacle");
+            GameEventsConnectorService.RaiseBackToMainMenuEvent();
     }
 
     private Vector2 ApplySpeed(Vector2 velocity)
@@ -70,8 +77,11 @@ public partial class Runner : CharacterBody2D
 
             var collisionNormal = collision.GetNormal();
 
-            if (collisionNormal.X < -0.7f && Mathf.Abs(collisionNormal.Y) < 0.3f)
+            if (collisionNormal.X < Constants.MinFrontalCollisionNormalX && 
+                Mathf.Abs(collisionNormal.Y) < Constants.MaxFrontalCollisionNormalYAbsolute)
+            {
                 return true;
+            }
         }
         
         return false;

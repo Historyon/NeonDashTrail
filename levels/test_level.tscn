@@ -1,9 +1,11 @@
-[gd_scene load_steps=3 format=4 uid="uid://djdtiin4166xl"]
+[gd_scene load_steps=4 format=4 uid="uid://djdtiin4166xl"]
 
 [ext_resource type="PackedScene" uid="uid://bgfc57g2t35e2" path="res://entities/runner.tscn" id="1_46lwt"]
+[ext_resource type="Script" uid="uid://b3uqbpxxl65x6" path="res://levels/TestLevel.cs" id="1_gmgay"]
 [ext_resource type="TileSet" uid="uid://c1qfbjhf75e4k" path="res://assets/tilesets/environment.tres" id="2_x25rp"]
 
 [node name="TestLevel" type="Node2D"]
+script = ExtResource("1_gmgay")
 
 [node name="Runner" parent="." instance=ExtResource("1_46lwt")]
 position = Vector2(16, 134)
