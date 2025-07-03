@@ -8,7 +8,9 @@ process_mode = 3
 script = ExtResource("1_44wlj")
 
 [node name="GameEventsConnector" parent="." instance=ExtResource("2_icitp")]
-ConnectToEvents = 18
+ConnectToEvents = 30
 
 [connection signal="BackToMainMenu" from="GameEventsConnector" to="." method="OnBackToMainMenu"]
+[connection signal="PauseGame" from="GameEventsConnector" to="." method="OnPauseGame"]
+[connection signal="ResumeGame" from="GameEventsConnector" to="." method="OnResumeGame"]
 [connection signal="StartGame" from="GameEventsConnector" to="." method="OnStartGame"]

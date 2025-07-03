@@ -9,6 +9,12 @@ public partial class Runner : CharacterBody2D
     [Export] public float Gravity { get; set; } = 800.0f;
     [Export] public float JumpForce { get; set; } = 250.0f;
 
+    public override void _Input(InputEvent @event)
+    {
+        if (@event.IsActionPressed("pause"))
+            GameEventsConnectorService.RaisePauseGameEvent();
+    }
+
     public override void _PhysicsProcess(double delta)
     {
         HandleMovement((float)delta);

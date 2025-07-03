@@ -15,4 +15,10 @@ public partial class Game : Node2D
     {
         GetTree().Quit();
     }
+    
+    private void OnPauseGame() => GetTree().Paused = true;
+    
+    private void OnResumeGame() => GetTree().Paused = false;
+    
+    private void OnBackToMainMenu() => GetTree().Paused = false;
 }

@@ -11,33 +11,28 @@ public partial class MenuManager : Node
     private Control _mainMenu;
     private Control _pauseMenu;
 
-    private bool _showMainMenu;
-
     public override void _Ready()
     {
         _mainMenu = MainMenuScene.Instantiate<MainMenu>();
         _mainMenu.Hide();
         MenuLayer.AddChild(_mainMenu);
+
+        _pauseMenu = InGameMenuScene.Instantiate<PauseMenu>();
+        _pauseMenu.Hide();
+        MenuLayer.AddChild(_pauseMenu);
     }
 
     public void ShowMainMenu()
     {
-        if (_showMainMenu) return;
-
-        _showMainMenu = true;
         _pauseMenu?.Hide();
         _mainMenu.Show();
     }
 
-    public void HideMainMenu()
-    {
-        if (!_showMainMenu) return;
-        
-        _showMainMenu = false;
-        _mainMenu.Hide();
-    }
-
     private void OnBackToMainMenu() => ShowMainMenu();
     
-    private void OnStartGame() => HideMainMenu();
+    private void OnStartGame() => _mainMenu.Hide();
+
+    private void OnPauseGame() => _pauseMenu.Show();
+    
+    private void OnResumeGame() => _pauseMenu.Hide();
 }
