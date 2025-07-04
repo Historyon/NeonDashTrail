@@ -1,5 +1,6 @@
 using Godot;
 using NeonDashTrail.connectors;
+using NeonDashTrail.entities.level_elements;
 
 namespace NeonDashTrail.entities;
 
@@ -8,6 +9,9 @@ public partial class Runner : CharacterBody2D
     [Export] public float Speed { get; set; } = 100.0f;
     [Export] public float Gravity { get; set; } = 800.0f;
     [Export] public float JumpForce { get; set; } = 250.0f;
+    [Export] public RayCast2D CheckpointRayCast { get; set; }
+
+    private int _lastReachedCheckpointNumber;
 
     public override void _Ready()
     {
@@ -17,8 +21,11 @@ public partial class Runner : CharacterBody2D
 
     public override void _Input(InputEvent @event)
     {
-        if (@event.IsActionPressed("pause"))
+        if (@event.IsActionPressed(Controls.Pause))
             GameEventsConnectorService.RaisePauseGameEvent();
+        
+        if (@event.IsActionPressed(Controls.Reset))
+            LevelEventsConnectorService.RaiseResetToCheckpointEvent();
     }
 
     public override void _PhysicsProcess(double delta)
@@ -41,12 +48,10 @@ public partial class Runner : CharacterBody2D
         Velocity = currentVelocity;
         
         MoveAndSlide();
-        
+        CheckForCheckpoint();
+
         if (CollisionWithObstacle())
-        {
-            StopRun();
-            GameEventsConnectorService.RaiseBackToMainMenuEvent();
-        }
+            LevelEventsConnectorService.RaiseResetToCheckpointEvent();
     }
 
     private Vector2 ApplySpeed(Vector2 velocity)
@@ -65,7 +70,7 @@ public partial class Runner : CharacterBody2D
 
     private Vector2 ProcessJump(Vector2 velocity)
     {
-        if (!Input.IsActionJustPressed("jump") || !IsOnFloor()) return velocity;
+        if (!Input.IsActionJustPressed(Controls.Jump) || !IsOnFloor()) return velocity;
 
         velocity.Y = -JumpForce;
         return velocity;
@@ -98,5 +103,14 @@ public partial class Runner : CharacterBody2D
         }
         
         return false;
+    }
+
+    private void CheckForCheckpoint()
+    {
+        if (!CheckpointRayCast.IsColliding() ||
+            CheckpointRayCast.GetCollider() is not StartPosition startPosition ||
+            startPosition.CheckpointNumber == _lastReachedCheckpointNumber) return;
+        
+        LevelEventsConnectorService.RaiseCheckpointReachedEvent(startPosition.CheckpointNumber);
     }
 }

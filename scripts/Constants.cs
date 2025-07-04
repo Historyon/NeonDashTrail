@@ -21,3 +21,10 @@ public static class Groups
 {
     public const string StartPositions = "start_positions";
 }
+
+public static class Controls
+{
+    public const string Jump = "jump";
+    public const string Pause = "pause";
+    public const string Reset = "reset";
+}

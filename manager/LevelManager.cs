@@ -10,6 +10,7 @@ public partial class LevelManager : Node
     [Export] public Node2D ParentToConnectLevel { get; set; }
 
     private LevelBase _activeLevel;
+    private int _reachedCheckpointNumber;
     
     private void OnStartGame()
     {
@@ -18,7 +19,8 @@ public partial class LevelManager : Node
         _activeLevel = TestLevel.Instantiate() as LevelBase;
         ParentToConnectLevel.AddChild(_activeLevel);
         _activeLevel!.Show();
-        
+
+        _reachedCheckpointNumber = 0;
         _activeLevel.StartRunFromFirstStartPosition();
     }
 
@@ -33,4 +35,8 @@ public partial class LevelManager : Node
         _activeLevel.QueueFree();
         _activeLevel = null;
     }
+    
+    private void OnCheckpointReached(int checkpointNumber) => _reachedCheckpointNumber = checkpointNumber;
+    
+    private void OnResetToCheckpoint() => _activeLevel.StartRunFromCheckpoint(_reachedCheckpointNumber);
 }
