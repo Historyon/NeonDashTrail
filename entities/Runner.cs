@@ -108,7 +108,7 @@ public partial class Runner : CharacterBody2D
     private void CheckForCheckpoint()
     {
         if (!CheckpointRayCast.IsColliding() ||
-            CheckpointRayCast.GetCollider() is not StartPosition startPosition ||
+            CheckpointRayCast.GetCollider() is not Checkpoint startPosition ||
             startPosition.CheckpointNumber == _lastReachedCheckpointNumber) return;
         
         LevelEventsConnectorService.RaiseCheckpointReachedEvent(startPosition.CheckpointNumber);

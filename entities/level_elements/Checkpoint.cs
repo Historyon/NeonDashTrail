@@ -1,6 +1,6 @@
 namespace NeonDashTrail.entities.level_elements;
 
-public partial class StartPosition : StaticBody2D
+public partial class Checkpoint : StaticBody2D
 {
     [Export] public Marker2D RunnerPosition { get; set; }
 

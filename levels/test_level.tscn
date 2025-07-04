@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://bgfc57g2t35e2" path="res://entities/runner.tscn" id="1_46lwt"]
 [ext_resource type="Script" uid="uid://bow20bqnms1j2" path="res://levels/LevelBase.cs" id="1_gmgay"]
 [ext_resource type="TileSet" uid="uid://c1qfbjhf75e4k" path="res://tilesets/environment.tres" id="2_x25rp"]
-[ext_resource type="PackedScene" uid="uid://b5812krncjl64" path="res://entities/level_elements/start_position.tscn" id="4_w7r7j"]
+[ext_resource type="PackedScene" uid="uid://b5812krncjl64" path="res://entities/level_elements/checkpoint.tscn" id="4_w7r7j"]
 
 [node name="TestLevel" type="Node2D" node_paths=PackedStringArray("Runner")]
 script = ExtResource("1_gmgay")
@@ -20,8 +20,8 @@ zoom = Vector2(4, 4)
 tile_map_data = PackedByteArray("AAAOAAkAAAAAAAAAAAAMAAkAAAACAAAAAAANAAkAAAAAAAAAAAALAAkAAAACAAAAAAAKAAkAAAACAAAAAAAJAAkAAAAAAAAAAAAIAAkAAAACAAAAAAAHAAkAAAACAAAAAAAGAAkAAAAAAAAAAAAEAAkAAAACAAAAAAADAAkAAAAAAAAAAAACAAkAAAAAAAAAAAAAAAkAAAACAAAAAAAPAAkAAAAAAAAAAAAQAAkAAAAAAAAAAAARAAkAAAAAAAAAAAASAAkAAAAAAAAAAAATAAkAAAACAAAAAAAUAAkAAAAAAAAAAAAVAAkAAAAAAAAAAAAWAAkAAAAAAAAAAAAXAAkAAAACAAAAAAAYAAkAAAACAAAAAAAZAAkAAAAAAAAAAAAaAAkAAAAAAAAAAAAbAAkAAAACAAAAAAAcAAkAAAAAAAAAAAAdAAkAAAACAAAAAAAeAAkAAAACAAAAAAAfAAkAAAACAAAAAAAgAAkAAAAAAAAAAAAhAAkAAAACAAAAAAAiAAkAAAACAAAAAAAjAAkAAAACAAAAAAAkAAkAAAACAAAAAAAlAAkAAAAAAAAAAAAmAAkAAAAAAAAAAAAnAAkAAAACAAAAAAAoAAkAAAACAAAAAAApAAkAAAACAAAAAAAqAAkAAAACAAAAAAArAAkAAAAAAAAAAAAsAAkAAAAAAAAAAAAtAAkAAAACAAAAAAAuAAkAAAAAAAAAAAAvAAkAAAAAAAAAAAAwAAkAAAACAAAAAAAJAAgAAAACAAAAAAASAAgAAAACAAAAAAATAAgAAAACAAAAAAAeAAgAAAACAAAAAAAfAAgAAAACAAAAAAAgAAgAAAACAAAAAAAhAAgAAAACAAAAAAArAAgAAAACAAAAAAAsAAgAAAACAAAAAAABAAkAAAAAAAAAAAAFAAkAAAAAAAAAAAA=")
 tile_set = ExtResource("2_x25rp")
 
-[node name="StartPosition" parent="." instance=ExtResource("4_w7r7j")]
+[node name="Checkpoint" parent="." instance=ExtResource("4_w7r7j")]
 position = Vector2(40, 152)
 
-[node name="StartPosition2" parent="." instance=ExtResource("4_w7r7j")]
+[node name="Checkpoint2" parent="." instance=ExtResource("4_w7r7j")]
 position = Vector2(408, 152)

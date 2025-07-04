@@ -1,19 +1,19 @@
 [gd_scene load_steps=5 format=3 uid="uid://b5812krncjl64"]
 
-[ext_resource type="Script" uid="uid://dnpfbgbpul2vp" path="res://entities/level_elements/StartPosition.cs" id="1_k5bcr"]
-[ext_resource type="Texture2D" uid="uid://cexayt18l3gxn" path="res://assets/sprites.png" id="1_u0eqi"]
+[ext_resource type="Script" path="res://entities/level_elements/Checkpoint.cs" id="1_u6q6p"]
+[ext_resource type="Texture2D" uid="uid://cexayt18l3gxn" path="res://assets/sprites.png" id="2_wftfu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_k5bcr"]
-atlas = ExtResource("1_u0eqi")
+atlas = ExtResource("2_wftfu")
 region = Rect2(0, 32, 16, 16)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_lbog4"]
 size = Vector2(16, 16)
 
-[node name="StartPosition" type="StaticBody2D" node_paths=PackedStringArray("RunnerPosition") groups=["start_positions"]]
+[node name="Checkpoint" type="StaticBody2D" node_paths=PackedStringArray("RunnerPosition") groups=["checkpoints"]]
 collision_layer = 5
 collision_mask = 0
-script = ExtResource("1_k5bcr")
+script = ExtResource("1_u6q6p")
 RunnerPosition = NodePath("RunnerPosition")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

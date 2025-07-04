@@ -11,11 +11,11 @@ public partial class LevelBase : Node2D, ILevel
 {
     [Export] public Runner Runner { get; set; }
     
-    private IReadOnlyList<StartPosition> _startPositions = new List<StartPosition>();
+    private IReadOnlyList<Checkpoint> _startPositions = new List<Checkpoint>();
 
     public override void _Ready()
     {
-        _startPositions = CollectStartPositions();
+        _startPositions = CollectCheckpoints();
         SetCheckpointNumbers();
     }
 
@@ -30,11 +30,11 @@ public partial class LevelBase : Node2D, ILevel
         _startPositions[checkpointNumber].SetRunnerToPosition(Runner);
     }
 
-    private IReadOnlyList<StartPosition> CollectStartPositions()
+    private IReadOnlyList<Checkpoint> CollectCheckpoints()
     {
         return GetTree()
-            .GetNodesInGroup(Groups.StartPositions)
-            .OfType<StartPosition>()
+            .GetNodesInGroup(Groups.Checkpoints)
+            .OfType<Checkpoint>()
             .OrderBy(node => node.GlobalPosition.X)
             .ToList();
     }

@@ -19,7 +19,7 @@ public static class Constants
 
 public static class Groups
 {
-    public const string StartPositions = "start_positions";
+    public const string Checkpoints = "checkpoints";
 }
 
 public static class Controls
