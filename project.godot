@@ -24,6 +24,10 @@ window/size/viewport_height=1080
 
 project/assembly_name="Neon Dash Trail"
 
+[global_group]
+
+start_positions=""
+
 [input]
 
 jump={

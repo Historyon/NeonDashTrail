@@ -1,10 +1,10 @@
 [gd_resource type="TileSet" load_steps=3 format=3 uid="uid://c1qfbjhf75e4k"]
 
-[ext_resource type="Texture2D" uid="uid://cexayt18l3gxn" path="res://assets/sprites.png" id="1_ynrxp"]
+[ext_resource type="Texture2D" uid="uid://cexayt18l3gxn" path="res://assets/sprites.png" id="1_euxth"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2j3g5"]
 resource_name = "Environments"
-texture = ExtResource("1_ynrxp")
+texture = ExtResource("1_euxth")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 2:0/0 = 0

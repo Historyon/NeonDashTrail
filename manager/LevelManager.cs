@@ -9,15 +9,17 @@ public partial class LevelManager : Node
     [Export] public PackedScene TestLevel { get; set; }
     [Export] public Node2D ParentToConnectLevel { get; set; }
 
-    private Node2D _activeLevel;
+    private LevelBase _activeLevel;
     
     private void OnStartGame()
     {
         RemoveActiveLevel();
         
-        _activeLevel = TestLevel.Instantiate<TestLevel>();
+        _activeLevel = TestLevel.Instantiate() as LevelBase;
         ParentToConnectLevel.AddChild(_activeLevel);
-        _activeLevel.Show();
+        _activeLevel!.Show();
+        
+        _activeLevel.StartRunFromFirstStartPosition();
     }
 
     private void OnBackToMainMenu() => RemoveActiveLevel();

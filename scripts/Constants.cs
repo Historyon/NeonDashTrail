@@ -16,3 +16,8 @@ public static class Constants
     /// </summary>
     public const float MaxFrontalCollisionNormalYAbsolute = 0.3f;
 }
+
+public static class Groups
+{
+    public const string StartPositions = "start_positions";
+}
