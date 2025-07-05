@@ -25,19 +25,19 @@ Dieses Projekt dient außerdem als Devlog, um den Entwicklungsprozess transparen
 
 Willkommen zum Entwicklungstagebuch von **Neon Dash Trail**! Hier dokumentiere ich regelmäßig Fortschritte, Herausforderungen und spannende Erkenntnisse.
 
-## Version 0.3 – Erste Levelstrukturen (2025-07-04)
+### Version 0.3 – Erste Levelstrukturen (2025-07-04)
 
 - Checkpoints zu denen der Runner bewegt werden kann
 - Checkpoints werden automatisch vom Runner beim Vorbeilaufen aktiviert
 - Der Runner kann per Tastendruck oder bei einer Kollision in ein Hindernis, zu einem Checkpoint zurückgesetzt werden
 
-## Version 0.2 – Menüs (2025-07-03)
+### Version 0.2 – Menüs (2025-07-03)
 
 - Haupt- und Pausenmenü implementiert
 - Spieler können während des Spiels pausieren
 - Kommunikation mithilfe Connectors zwischen entlegenen Nodes
 
-## Version 0.1 – Start (2025-07-02)
+### Version 0.1 – Start (2025-07-02)
 
 - Projekt initialisiert mit Godot 4.4
 - Erste Spielfigur und Bewegung implementiert
@@ -48,3 +48,11 @@ Willkommen zum Entwicklungstagebuch von **Neon Dash Trail**! Hier dokumentiere i
 ---
 
 Vielen Dank fürs Lesen – Jonas 👋🏻
+
+## Assets & Quellen
+
+### Soundeffekte
+
+👉🏻 [Detaillierte Auflistung](docs/sources/audio_sources.md)
+
+- Diverse Soundeffekte von [Kenney.nl](https://kenney.nl/) (Public Domain, CC0)

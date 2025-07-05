@@ -10,6 +10,7 @@ public partial class Runner : CharacterBody2D
     [Export] public float Gravity { get; set; } = 800.0f;
     [Export] public float JumpForce { get; set; } = 250.0f;
     [Export] public RayCast2D CheckpointRayCast { get; set; }
+    [Export] public AudioStreamPlayer2D CheckpointAudio { get; set; }
 
     private int _lastReachedCheckpointNumber;
 
@@ -108,9 +109,11 @@ public partial class Runner : CharacterBody2D
     private void CheckForCheckpoint()
     {
         if (!CheckpointRayCast.IsColliding() ||
-            CheckpointRayCast.GetCollider() is not Checkpoint startPosition ||
-            startPosition.CheckpointNumber == _lastReachedCheckpointNumber) return;
+            CheckpointRayCast.GetCollider() is not Checkpoint checkpoint ||
+            checkpoint.CheckpointNumber == _lastReachedCheckpointNumber) return;
         
-        LevelEventsConnectorService.RaiseCheckpointReachedEvent(startPosition.CheckpointNumber);
+        _lastReachedCheckpointNumber = checkpoint.CheckpointNumber;
+        LevelEventsConnectorService.RaiseCheckpointReachedEvent(checkpoint.CheckpointNumber);
+        CheckpointAudio.Play();
     }
 }
