@@ -12,10 +12,10 @@ region = Rect2(64, 0, 16, 16)
 radius = 5.0
 height = 16.0
 
-[node name="Runner" type="CharacterBody2D" node_paths=PackedStringArray("CheckpointRayCast", "CheckpointAudio")]
+[node name="Runner" type="CharacterBody2D" node_paths=PackedStringArray("CheckpointGoalRayCast", "CheckpointAudio")]
 collision_layer = 2
 script = ExtResource("1_r2fxw")
-CheckpointRayCast = NodePath("CheckpointRayCast")
+CheckpointGoalRayCast = NodePath("CheckpointGoalRayCast")
 CheckpointAudio = NodePath("CheckpointAudio")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -24,10 +24,11 @@ texture = SubResource("AtlasTexture_gude8")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_r2fxw")
 
-[node name="CheckpointRayCast" type="RayCast2D" parent="."]
-target_position = Vector2(0, 100)
-collision_mask = 4
+[node name="CheckpointGoalRayCast" type="RayCast2D" parent="."]
+target_position = Vector2(0, 45)
+collision_mask = 12
 
 [node name="CheckpointAudio" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_gude8")
+pitch_scale = 2.0
 area_mask = 0

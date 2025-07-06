@@ -1,4 +1,3 @@
-using Godot;
 using NeonDashTrail.connectors;
 using NeonDashTrail.entities.level_elements;
 
@@ -9,7 +8,7 @@ public partial class Runner : CharacterBody2D
     [Export] public float Speed { get; set; } = 100.0f;
     [Export] public float Gravity { get; set; } = 800.0f;
     [Export] public float JumpForce { get; set; } = 250.0f;
-    [Export] public RayCast2D CheckpointRayCast { get; set; }
+    [Export] public RayCast2D CheckpointGoalRayCast { get; set; }
     [Export] public AudioStreamPlayer2D CheckpointAudio { get; set; }
 
     private int _lastReachedCheckpointNumber;
@@ -32,6 +31,7 @@ public partial class Runner : CharacterBody2D
     public override void _PhysicsProcess(double delta)
     {
         HandleMovement((float)delta);
+        HandleCollisions();
     }
     
     public void StartRun() => SetPhysicsProcess(true);
@@ -49,6 +49,16 @@ public partial class Runner : CharacterBody2D
         Velocity = currentVelocity;
         
         MoveAndSlide();
+    }
+
+    private void HandleCollisions()
+    {
+        if (IsGoalReached())
+        {
+            GoalReached();
+            return;
+        }
+        
         CheckForCheckpoint();
 
         if (CollisionWithObstacle())
@@ -108,12 +118,20 @@ public partial class Runner : CharacterBody2D
 
     private void CheckForCheckpoint()
     {
-        if (!CheckpointRayCast.IsColliding() ||
-            CheckpointRayCast.GetCollider() is not Checkpoint checkpoint ||
+        if (!CheckpointGoalRayCast.IsColliding() ||
+            CheckpointGoalRayCast.GetCollider() is not Checkpoint checkpoint ||
             checkpoint.CheckpointNumber == _lastReachedCheckpointNumber) return;
         
         _lastReachedCheckpointNumber = checkpoint.CheckpointNumber;
         LevelEventsConnectorService.RaiseCheckpointReachedEvent(checkpoint.CheckpointNumber);
         CheckpointAudio.Play();
+    }
+
+    private bool IsGoalReached() => CheckpointGoalRayCast.IsColliding() && CheckpointGoalRayCast.GetCollider() is Goal;
+
+    private void GoalReached()
+    {
+        StopRun();
+        LevelEventsConnectorService.RaiseGoalReachedEvent();
     }
 }
