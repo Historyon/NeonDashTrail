@@ -1,0 +1,22 @@
+[gd_scene load_steps=5 format=3 uid="uid://cewpa6jfkfob2"]
+
+[ext_resource type="Texture2D" uid="uid://cexayt18l3gxn" path="res://assets/sprites.png" id="1_wbdxt"]
+[ext_resource type="Script" uid="uid://c7vmetx6cyttf" path="res://entities/level_elements/Goal.cs" id="1_xirlg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xirlg"]
+atlas = ExtResource("1_wbdxt")
+region = Rect2(32, 32, 16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_wbdxt"]
+size = Vector2(16, 16)
+
+[node name="Goal" type="StaticBody2D"]
+collision_layer = 9
+collision_mask = 0
+script = ExtResource("1_xirlg")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = SubResource("AtlasTexture_xirlg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_wbdxt")

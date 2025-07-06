@@ -1,0 +1,22 @@
+[gd_resource type="TileSet" load_steps=6 format=3 uid="uid://c1qfbjhf75e4k"]
+
+[ext_resource type="Texture2D" uid="uid://cexayt18l3gxn" path="res://assets/sprites.png" id="1_euxth"]
+[ext_resource type="PackedScene" uid="uid://cewpa6jfkfob2" path="res://entities/level_elements/goal.tscn" id="2_euxth"]
+[ext_resource type="PackedScene" uid="uid://8w46wa7fqqeq" path="res://entities/level_elements/jumping_pad.tscn" id="3_oscfw"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2j3g5"]
+resource_name = "Environments"
+texture = ExtResource("1_euxth")
+0:0/0 = 0
+0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+2:0/0 = 0
+2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
+
+[sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_oscfw"]
+scenes/1/scene = ExtResource("2_euxth")
+scenes/2/scene = ExtResource("3_oscfw")
+
+[resource]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_2j3g5")
+sources/1 = SubResource("TileSetScenesCollectionSource_oscfw")

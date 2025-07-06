@@ -16,3 +16,15 @@ public static class Constants
     /// </summary>
     public const float MaxFrontalCollisionNormalYAbsolute = 0.3f;
 }
+
+public static class Groups
+{
+    public const string Checkpoints = "checkpoints";
+}
+
+public static class Controls
+{
+    public const string Jump = "jump";
+    public const string Pause = "pause";
+    public const string Reset = "reset";
+}

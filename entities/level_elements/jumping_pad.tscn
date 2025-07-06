@@ -1,0 +1,82 @@
+[gd_scene load_steps=12 format=3 uid="uid://8w46wa7fqqeq"]
+
+[ext_resource type="Script" uid="uid://c3poe8wf06o2e" path="res://entities/level_elements/JumpingPad.cs" id="1_b5o17"]
+[ext_resource type="Texture2D" uid="uid://cexayt18l3gxn" path="res://assets/sprites.png" id="2_o4avu"]
+[ext_resource type="PackedScene" uid="uid://cplxqsyhp3dq3" path="res://components/jump_area_component.tscn" id="3_o4avu"]
+[ext_resource type="AudioStream" uid="uid://be0oy4d0ipynl" path="res://assets/audio/phaseJump1.ogg" id="4_tjv7t"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rf0n7"]
+atlas = ExtResource("2_o4avu")
+region = Rect2(32, 64, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pyof8"]
+atlas = ExtResource("2_o4avu")
+region = Rect2(64, 64, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tjv7t"]
+atlas = ExtResource("2_o4avu")
+region = Rect2(0, 64, 16, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o4avu"]
+atlas = ExtResource("2_o4avu")
+region = Rect2(0, 64, 16, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rf0n7"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rf0n7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_pyof8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tjv7t")
+}],
+"loop": false,
+"name": &"activated",
+"speed": 10.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o4avu")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pyof8"]
+size = Vector2(16, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tjv7t"]
+size = Vector2(16, 2)
+
+[node name="JumpingPad" type="StaticBody2D" node_paths=PackedStringArray("AnimatedSprite", "JumpAreaComponent", "ActivationSound")]
+collision_mask = 0
+script = ExtResource("1_b5o17")
+AnimatedSprite = NodePath("AnimatedSprite2D")
+JumpAreaComponent = NodePath("JumpAreaComponent")
+ActivationSound = NodePath("ActivationSound")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_rf0n7")
+animation = &"idle"
+autoplay = "idle"
+offset = Vector2(0, -8)
+
+[node name="GroundCollisionShape" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_pyof8")
+
+[node name="JumpAreaComponent" parent="." instance=ExtResource("3_o4avu")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="JumpAreaComponent"]
+position = Vector2(0, -9)
+shape = SubResource("RectangleShape2D_tjv7t")
+debug_color = Color(0.661953, 0.513641, 0, 0.42)
+
+[node name="ActivationSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_tjv7t")
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="OnAnimationFinished"]
+[connection signal="JumpAreaActivated" from="JumpAreaComponent" to="." method="OnJumpAreaActivated"]

@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://b40ie7mpcd4np" path="res://manager/level_manager.tscn" id="4_iywne"]
 [ext_resource type="PackedScene" uid="uid://djdtiin4166xl" path="res://levels/test_level.tscn" id="4_p57ef"]
 [ext_resource type="PackedScene" uid="uid://ddsuln7g1mauh" path="res://ui/menus/pause_menu.tscn" id="4_u5sy4"]
-[ext_resource type="PackedScene" uid="uid://cctjppv5s8p10" path="res://connectors/GameEventsConnector.tscn" id="5_iywne"]
+[ext_resource type="PackedScene" uid="uid://cctjppv5s8p10" path="res://connectors/game_events_connector.tscn" id="5_iywne"]
 
 [node name="Game" type="Node2D" node_paths=PackedStringArray("MenuManager")]
 script = ExtResource("1_uwrxv")

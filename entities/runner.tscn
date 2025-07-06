@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bgfc57g2t35e2"]
+[gd_scene load_steps=6 format=3 uid="uid://bgfc57g2t35e2"]
 
 [ext_resource type="Script" uid="uid://da4pibqy2pa5w" path="res://entities/Runner.cs" id="1_r2fxw"]
 [ext_resource type="Texture2D" uid="uid://cexayt18l3gxn" path="res://assets/sprites.png" id="2_r2fxw"]
+[ext_resource type="AudioStream" uid="uid://nyh7jlco020t" path="res://assets/audio/zap1.ogg" id="3_gude8"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gude8"]
 atlas = ExtResource("2_r2fxw")
@@ -11,12 +12,23 @@ region = Rect2(64, 0, 16, 16)
 radius = 5.0
 height = 16.0
 
-[node name="Runner" type="CharacterBody2D"]
+[node name="Runner" type="CharacterBody2D" node_paths=PackedStringArray("CheckpointGoalRayCast", "CheckpointAudio")]
 collision_layer = 2
 script = ExtResource("1_r2fxw")
+CheckpointGoalRayCast = NodePath("CheckpointGoalRayCast")
+CheckpointAudio = NodePath("CheckpointAudio")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_gude8")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_r2fxw")
+
+[node name="CheckpointGoalRayCast" type="RayCast2D" parent="."]
+target_position = Vector2(0, 45)
+collision_mask = 12
+
+[node name="CheckpointAudio" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_gude8")
+pitch_scale = 2.0
+area_mask = 0
