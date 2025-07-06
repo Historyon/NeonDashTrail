@@ -11,3 +11,4 @@ Alle Audiodateien zu finden unter 👉🏻 [assets/audio](../../assets/audio)
 |-----------------|---------------------|
 | zap1.ogg        | Checkpoint erreicht |
 | zapTwoTone2.ogg | Ziel erreicht       |
+| phaseJump1.ogg  | Aktivierung JumpPad |

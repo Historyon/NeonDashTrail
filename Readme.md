@@ -30,6 +30,10 @@ Willkommen zum Entwicklungstagebuch von **Neon Dash Trail**! Hier dokumentiere i
 - Checkpoints zu denen der Runner bewegt werden kann
 - Checkpoints werden automatisch vom Runner beim Vorbeilaufen aktiviert
 - Der Runner kann per Tastendruck oder bei einer Kollision in ein Hindernis, zu einem Checkpoint zurückgesetzt werden
+- Beim Erreichen des Ziels wird das Hauptmenü angezeigt
+- Beim Betreten des JumpingPads wird ein höherer Sprung ausgeführt
+
+![Version 03 animation](docs/gifs/version_03.gif)
 
 ### Version 0.2 – Menüs (2025-07-03)
 

@@ -1,9 +1,10 @@
 using NeonDashTrail.connectors;
 using NeonDashTrail.entities.level_elements;
+using NeonDashTrail.interfaces;
 
 namespace NeonDashTrail.entities;
 
-public partial class Runner : CharacterBody2D
+public partial class Runner : CharacterBody2D, IJumpableObject
 {
     [Export] public float Speed { get; set; } = 100.0f;
     [Export] public float Gravity { get; set; } = 800.0f;
@@ -12,6 +13,7 @@ public partial class Runner : CharacterBody2D
     [Export] public AudioStreamPlayer2D CheckpointAudio { get; set; }
 
     private int _lastReachedCheckpointNumber;
+    private float? _externalJumpForce;
 
     public override void _Ready()
     {
@@ -37,6 +39,8 @@ public partial class Runner : CharacterBody2D
     public void StartRun() => SetPhysicsProcess(true);
     
     public void StopRun() => SetPhysicsProcess(false);
+    
+    public void AddJumpForce(float jumpForce) => _externalJumpForce = jumpForce;
 
     private void HandleMovement(float delta)
     {
@@ -81,9 +85,24 @@ public partial class Runner : CharacterBody2D
 
     private Vector2 ProcessJump(Vector2 velocity)
     {
-        if (!Input.IsActionJustPressed(Controls.Jump) || !IsOnFloor()) return velocity;
+        if (!IsOnFloor())
+        {
+            _externalJumpForce = null;
+            return velocity;
+        }
 
-        velocity.Y = -JumpForce;
+        if (_externalJumpForce is > 0)
+        {
+            velocity.Y = -_externalJumpForce.Value;
+            _externalJumpForce = null;
+            return velocity;       
+        }
+
+        if (Input.IsActionJustPressed(Controls.Jump))
+        {
+            velocity.Y = -JumpForce;
+        }
+
         return velocity;
     }
 
