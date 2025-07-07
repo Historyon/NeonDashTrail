@@ -1,6 +1,8 @@
 using NeonDashTrail.connectors;
 using NeonDashTrail.entities.level_elements;
 using NeonDashTrail.interfaces;
+using NeonDashTrail.states.runner_states;
+using NeonDashTrail.states.runner_states.args;
 
 namespace NeonDashTrail.entities;
 
@@ -11,9 +13,9 @@ public partial class Runner : CharacterBody2D, IJumpableObject
     [Export] public float JumpForce { get; set; } = 250.0f;
     [Export] public RayCast2D CheckpointGoalRayCast { get; set; }
     [Export] public AudioStreamPlayer2D CheckpointAudio { get; set; }
+    [Export] public RunnerStateMachine StateMachine { get; set; }
 
     private int _lastReachedCheckpointNumber;
-    private float? _externalJumpForce;
 
     public override void _Ready()
     {
@@ -32,27 +34,25 @@ public partial class Runner : CharacterBody2D, IJumpableObject
 
     public override void _PhysicsProcess(double delta)
     {
-        HandleMovement((float)delta);
+        MoveAndSlide();
         HandleCollisions();
     }
     
-    public void StartRun() => SetPhysicsProcess(true);
-    
-    public void StopRun() => SetPhysicsProcess(false);
-    
-    public void AddJumpForce(float jumpForce) => _externalJumpForce = jumpForce;
-
-    private void HandleMovement(float delta)
+    public void StartRun()
     {
-        var currentVelocity = Velocity;
-        
-        currentVelocity = ApplyGravity(currentVelocity, delta);
-        currentVelocity = ProcessJump(currentVelocity);
-        currentVelocity = ApplySpeed(currentVelocity);
-        
-        Velocity = currentVelocity;
-        
-        MoveAndSlide();
+        SetPhysicsProcess(true);
+        StateMachine.SetPhysicsProcess(true);
+    }
+
+    public void StopRun()
+    {
+        SetPhysicsProcess(false);
+        StateMachine.SetPhysicsProcess(false);
+    }
+
+    public void AddJumpForce(float jumpForce)
+    {
+        StateMachine.TransitionTo(RunnerState.Jumping, new RunnerJumpingStateArgs(jumpForce));
     }
 
     private void HandleCollisions()
@@ -67,43 +67,6 @@ public partial class Runner : CharacterBody2D, IJumpableObject
 
         if (CollisionWithObstacle())
             LevelEventsConnectorService.RaiseResetToCheckpointEvent();
-    }
-
-    private Vector2 ApplySpeed(Vector2 velocity)
-    {
-        velocity.X = Speed;
-        return velocity;
-    }
-
-    private Vector2 ApplyGravity(Vector2 velocity, float delta)
-    {
-        if (IsOnFloor()) return velocity;
-
-        velocity.Y += Gravity * delta;
-        return velocity;
-    }
-
-    private Vector2 ProcessJump(Vector2 velocity)
-    {
-        if (!IsOnFloor())
-        {
-            _externalJumpForce = null;
-            return velocity;
-        }
-
-        if (_externalJumpForce is > 0)
-        {
-            velocity.Y = -_externalJumpForce.Value;
-            _externalJumpForce = null;
-            return velocity;       
-        }
-
-        if (Input.IsActionJustPressed(Controls.Jump))
-        {
-            velocity.Y = -JumpForce;
-        }
-
-        return velocity;
     }
 
     /// <summary>

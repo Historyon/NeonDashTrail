@@ -27,4 +27,5 @@ public static class Controls
     public const string Jump = "jump";
     public const string Pause = "pause";
     public const string Reset = "reset";
+    public const string Dash = "dash";
 }
