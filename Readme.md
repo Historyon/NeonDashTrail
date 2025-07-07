@@ -25,9 +25,10 @@ Dieses Projekt dient außerdem als Devlog, um den Entwicklungsprozess transparen
 
 Willkommen zum Entwicklungstagebuch von **Neon Dash Trail**! Hier dokumentiere ich regelmäßig Fortschritte, Herausforderungen und spannende Erkenntnisse.
 
-### Version 0.4 – Der Dash (2025-07-08)
+### Version 0.4 – Der Dash (2025-07-07)
 
 - State machine zur einfacheren Erweiterung von Runner-States implementiert
+- Runner kann jetzt auf Tastendruck dashen
 
 ### Version 0.3 – Erste Levelstrukturen (2025-07-06)
 

@@ -14,6 +14,8 @@ public partial class Runner : CharacterBody2D, IJumpableObject
     [Export] public RayCast2D CheckpointGoalRayCast { get; set; }
     [Export] public AudioStreamPlayer2D CheckpointAudio { get; set; }
     [Export] public RunnerStateMachine StateMachine { get; set; }
+    [Export, ExportCategory("Dash")] public float DashForce { get; set; } = 300.0f;
+    [Export] public float DashDuration { get; set; } = 0.2f;
 
     private int _lastReachedCheckpointNumber;
 
@@ -21,6 +23,7 @@ public partial class Runner : CharacterBody2D, IJumpableObject
     {
         // Disable Processing and running from the beginning
         StopRun();
+        StateMachine.Init();
     }
 
     public override void _Input(InputEvent @event)
@@ -29,11 +32,17 @@ public partial class Runner : CharacterBody2D, IJumpableObject
             GameEventsConnectorService.RaisePauseGameEvent();
         
         if (@event.IsActionPressed(Controls.Reset))
+        {
             LevelEventsConnectorService.RaiseResetToCheckpointEvent();
+            StateMachine.TransitionTo(RunnerState.Running);
+        }
+        
+        StateMachine?.Input(@event);
     }
 
     public override void _PhysicsProcess(double delta)
     {
+        StateMachine?.Process((float)delta);
         MoveAndSlide();
         HandleCollisions();
     }
@@ -66,7 +75,10 @@ public partial class Runner : CharacterBody2D, IJumpableObject
         CheckForCheckpoint();
 
         if (CollisionWithObstacle())
+        {
             LevelEventsConnectorService.RaiseResetToCheckpointEvent();
+            StateMachine.TransitionTo(RunnerState.Running);
+        }
     }
 
     /// <summary>

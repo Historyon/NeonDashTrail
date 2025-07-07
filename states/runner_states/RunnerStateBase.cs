@@ -14,7 +14,10 @@ public partial class RunnerStateBase : Node
     {
         StateMachine = stateMachine;
         Runner = runner;
+        AfterInit();
     }
+
+    protected virtual void AfterInit() { }
 
     public virtual void Enter(StateTransitionArgs transitionArgs = null) {  }
 
@@ -22,5 +25,5 @@ public partial class RunnerStateBase : Node
 
     public virtual void HandleInput(InputEvent @event) { }
 
-    public virtual void PhysicsProcess(float delta) { }
+    public virtual void HandleProcess(float delta) { }
 }

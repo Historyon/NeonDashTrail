@@ -11,7 +11,7 @@ public partial class RunnerStateMachine : Node
     private readonly Dictionary<RunnerState, RunnerStateBase> _states = new();
     private RunnerStateBase _currentState;
 
-    public override void _Ready()
+    public void Init()
     {
         foreach (var child in GetChildren())
         {
@@ -25,18 +25,20 @@ public partial class RunnerStateMachine : Node
         _currentState = _states[InitialState];
     }
 
-    public override void _Input(InputEvent @event)
+    public void Input(InputEvent @event)
     {
         _currentState?.HandleInput(@event);
     }
 
-    public override void _PhysicsProcess(double delta)
+    public void Process(float delta)
     {
-        _currentState?.PhysicsProcess((float) delta);
+        _currentState?.HandleProcess(delta);
     }
 
     public void TransitionTo(RunnerState toState, StateTransitionArgs transitionArgs = null)
     {
+        if (_currentState == _states[toState]) return;
+        
         _currentState?.Exit();
         _currentState = _states[toState];
         _currentState?.Enter(transitionArgs);

@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bgfc57g2t35e2"]
+[gd_scene load_steps=11 format=3 uid="uid://bgfc57g2t35e2"]
 
 [ext_resource type="Script" uid="uid://da4pibqy2pa5w" path="res://entities/Runner.cs" id="1_r2fxw"]
 [ext_resource type="Texture2D" uid="uid://cexayt18l3gxn" path="res://assets/sprites.png" id="2_r2fxw"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" uid="uid://f4mfeaacv7ei" path="res://states/runner_states/RunnerStateRunning.cs" id="5_x64ep"]
 [ext_resource type="Script" uid="uid://ddgtoy4ain6v7" path="res://states/runner_states/RunnerStateFalling.cs" id="6_yf7cc"]
 [ext_resource type="Script" uid="uid://siak1h637s2u" path="res://states/runner_states/RunnerStateJumping.cs" id="7_cg8b6"]
+[ext_resource type="Script" uid="uid://cwpdp8n54madw" path="res://states/runner_states/RunnerStateDashing.cs" id="8_x64ep"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gude8"]
 atlas = ExtResource("2_r2fxw")
@@ -53,3 +54,12 @@ metadata/_custom_type_script = "uid://ddgtoy4ain6v7"
 [node name="RunnerStateJumping" type="Node" parent="RunnerStateMachine"]
 script = ExtResource("7_cg8b6")
 metadata/_custom_type_script = "uid://siak1h637s2u"
+
+[node name="RunnerStateDashing" type="Node" parent="RunnerStateMachine" node_paths=PackedStringArray("DashTimer")]
+script = ExtResource("8_x64ep")
+DashTimer = NodePath("DashTimer")
+metadata/_custom_type_script = "uid://cwpdp8n54madw"
+
+[node name="DashTimer" type="Timer" parent="RunnerStateMachine/RunnerStateDashing"]
+
+[connection signal="timeout" from="RunnerStateMachine/RunnerStateDashing/DashTimer" to="RunnerStateMachine/RunnerStateDashing" method="OnDashTimerTimeout"]

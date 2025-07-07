@@ -5,7 +5,7 @@ public partial class RunnerStateFalling : RunnerStateBase
 {
     public override RunnerState State => RunnerState.Falling;
 
-    public override void PhysicsProcess(float delta)
+    public override void HandleProcess(float delta)
     {
         var velocity = Runner.Velocity;
         velocity.Y += Runner.Gravity * delta;
@@ -13,5 +13,8 @@ public partial class RunnerStateFalling : RunnerStateBase
         
         if (Runner.IsOnFloor())
             StateMachine.TransitionTo(RunnerState.Running);
+
+        if (Input.IsActionJustPressed(Controls.Dash)) 
+            StateMachine.TransitionTo(RunnerState.Dashing);
     }
 }
