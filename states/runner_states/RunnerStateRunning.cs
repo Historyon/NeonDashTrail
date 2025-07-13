@@ -5,6 +5,11 @@ public partial class RunnerStateRunning : RunnerStateBase
 {
     public override RunnerState State => RunnerState.Running;
 
+    public override void Enter(StateTransitionArgs transitionArgs = null)
+    {
+        Runner.DashResetRequired = false;
+    }
+
     public override void HandleProcess(float delta)
     {
         if (!Runner.IsOnFloor())
@@ -20,7 +25,7 @@ public partial class RunnerStateRunning : RunnerStateBase
             return;
         }
 
-        if (Input.IsActionJustPressed(Controls.Dash))
+        if (Input.IsActionJustPressed(Controls.Dash) && Runner.IsDashPossible)
         {
             StateMachine.TransitionTo(RunnerState.Dashing);
             return;

@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://bgfc57g2t35e2"]
+[gd_scene load_steps=12 format=3 uid="uid://bgfc57g2t35e2"]
 
 [ext_resource type="Script" uid="uid://da4pibqy2pa5w" path="res://entities/Runner.cs" id="1_r2fxw"]
 [ext_resource type="Texture2D" uid="uid://cexayt18l3gxn" path="res://assets/sprites.png" id="2_r2fxw"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" uid="uid://ddgtoy4ain6v7" path="res://states/runner_states/RunnerStateFalling.cs" id="6_yf7cc"]
 [ext_resource type="Script" uid="uid://siak1h637s2u" path="res://states/runner_states/RunnerStateJumping.cs" id="7_cg8b6"]
 [ext_resource type="Script" uid="uid://cwpdp8n54madw" path="res://states/runner_states/RunnerStateDashing.cs" id="8_x64ep"]
+[ext_resource type="AudioStream" uid="uid://h46b6m63iybp" path="res://assets/audio/cloth3.ogg" id="9_yf7cc"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gude8"]
 atlas = ExtResource("2_r2fxw")
@@ -17,12 +18,13 @@ region = Rect2(64, 0, 16, 16)
 radius = 5.0
 height = 16.0
 
-[node name="Runner" type="CharacterBody2D" node_paths=PackedStringArray("CheckpointGoalRayCast", "CheckpointAudio", "StateMachine")]
+[node name="Runner" type="CharacterBody2D" node_paths=PackedStringArray("CheckpointGoalRayCast", "CheckpointAudio", "StateMachine", "DashLockTimer")]
 collision_layer = 2
 script = ExtResource("1_r2fxw")
 CheckpointGoalRayCast = NodePath("CheckpointGoalRayCast")
 CheckpointAudio = NodePath("CheckpointAudio")
 StateMachine = NodePath("RunnerStateMachine")
+DashLockTimer = NodePath("DashLockTimer")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_gude8")
@@ -38,6 +40,10 @@ collision_mask = 12
 stream = ExtResource("3_gude8")
 pitch_scale = 2.0
 area_mask = 0
+
+[node name="DashLockTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
 
 [node name="RunnerStateMachine" parent="." node_paths=PackedStringArray("Runner") instance=ExtResource("4_ek3a7")]
 InitialState = 1
@@ -55,11 +61,17 @@ metadata/_custom_type_script = "uid://ddgtoy4ain6v7"
 script = ExtResource("7_cg8b6")
 metadata/_custom_type_script = "uid://siak1h637s2u"
 
-[node name="RunnerStateDashing" type="Node" parent="RunnerStateMachine" node_paths=PackedStringArray("DashTimer")]
+[node name="RunnerStateDashing" type="Node" parent="RunnerStateMachine" node_paths=PackedStringArray("DashTimer", "DashSound")]
 script = ExtResource("8_x64ep")
 DashTimer = NodePath("DashTimer")
+DashSound = NodePath("AudioStreamPlayer2D")
 metadata/_custom_type_script = "uid://cwpdp8n54madw"
 
 [node name="DashTimer" type="Timer" parent="RunnerStateMachine/RunnerStateDashing"]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="RunnerStateMachine/RunnerStateDashing"]
+stream = ExtResource("9_yf7cc")
+volume_db = 1.0
+pitch_scale = 2.07
 
 [connection signal="timeout" from="RunnerStateMachine/RunnerStateDashing/DashTimer" to="RunnerStateMachine/RunnerStateDashing" method="OnDashTimerTimeout"]

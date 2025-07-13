@@ -16,8 +16,12 @@ public partial class Runner : CharacterBody2D, IJumpableObject
     [Export] public RunnerStateMachine StateMachine { get; set; }
     [Export, ExportCategory("Dash")] public float DashForce { get; set; } = 300.0f;
     [Export] public float DashDuration { get; set; } = 0.2f;
+    [Export] public Timer DashLockTimer { get; set; }
 
     private int _lastReachedCheckpointNumber;
+    
+    public bool DashResetRequired { get; set; }
+    public bool IsDashPossible => DashLockTimer.TimeLeft <= 0 && !DashResetRequired;
 
     public override void _Ready()
     {
@@ -61,6 +65,7 @@ public partial class Runner : CharacterBody2D, IJumpableObject
 
     public void AddJumpForce(float jumpForce)
     {
+        DashLockTimer.Start();
         StateMachine.TransitionTo(RunnerState.Jumping, new RunnerJumpingStateArgs(jumpForce));
     }
 

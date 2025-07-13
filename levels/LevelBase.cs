@@ -1,4 +1,3 @@
-using System.Collections.Generic;
 using System.Linq;
 using NeonDashTrail.entities;
 using NeonDashTrail.entities.level_elements;
@@ -11,7 +10,7 @@ public partial class LevelBase : Node2D, ILevel
 {
     [Export] public Runner Runner { get; set; }
     
-    private IReadOnlyList<Checkpoint> _startPositions = new List<Checkpoint>();
+    private Checkpoint[] _startPositions = [];
 
     public override void _Ready()
     {
@@ -21,22 +20,23 @@ public partial class LevelBase : Node2D, ILevel
 
     public void StartRunFromFirstStartPosition()
     {
-        _startPositions[0].SetRunnerToPosition(Runner);
+        StartRunFromCheckpoint(0);
         Runner.StartRun();
     }
     
     public void StartRunFromCheckpoint(int checkpointNumber)
     {
+        Runner.DashResetRequired = false;
         _startPositions[checkpointNumber].SetRunnerToPosition(Runner);
     }
 
-    private IReadOnlyList<Checkpoint> CollectCheckpoints()
+    private Checkpoint[] CollectCheckpoints()
     {
         return GetTree()
             .GetNodesInGroup(Groups.Checkpoints)
             .OfType<Checkpoint>()
             .OrderBy(node => node.GlobalPosition.X)
-            .ToList();
+            .ToArray();
     }
 
     /// <summary>
@@ -44,7 +44,7 @@ public partial class LevelBase : Node2D, ILevel
     /// </summary>
     private void SetCheckpointNumbers()
     {
-        for (var i = 0; i < _startPositions.Count; i++)
+        for (var i = 0; i < _startPositions.Length; i++)
         {
             _startPositions[i].CheckpointNumber = i;
         }
