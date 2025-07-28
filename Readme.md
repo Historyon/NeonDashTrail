@@ -26,7 +26,7 @@ small but complete game.
 
 ## Devlog
 
-Willkommen zum Entwicklungstagebuch von **Neon Dash Trail**! Hier dokumentiere ich regelmäßig Fortschritte, Herausforderungen und spannende Erkenntnisse.
+Welcome to the development diary of Neon Dash Trail! Here, I regularly document progress, challenges, and exciting insights.
 
 ### Version 0.4 – Der Dash (2025-07-07)
 
