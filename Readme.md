@@ -13,14 +13,14 @@ its own challenges and design ideas.
 This project also serves as a devlog to make the development process transparent and provide insights into creating a 
 small but complete game.
 
-### Namenskonventionen
+### Naming Conventions
 
 - Entity
-  - Eine größere zusammenhängende Szene, welche sich aktiv im Spiel befindet (bspw. Runner)
+  -A larger, cohesive scene that actively exists within the game (e.g. Runner).
 - Manager
-  - Verwaltet Zustände vom Spiel (bspw. MenuManager) 
-- [Connectors (Erklärung)](docs/pattern/ConnectorPattern.md)
-  - System zum einfachen Verbinden von Signalen über mehrere Komponentenebenen hinweg  
+  - Manages game states (e.g. MenuManager).
+- [Connectors (Explanation)](docs/pattern/ConnectorPattern.md)
+  - A system for easily connecting signals across multiple layers of components  
 
 ---
 
