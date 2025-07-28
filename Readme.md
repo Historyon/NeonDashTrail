@@ -4,11 +4,14 @@
 
 ## Vision
 
-**Neon Dash Trail** ist ein kleiner 2D-Runner, entwickelt mit Godot und C#, der handgebaute Level statt eines klassischen Endlosmodus bietet. Ziel des Projekts ist es, die Grundlagen von Game Development mit Godot zu erlernen und zu demonstrieren.
+**Neon Dash Trail** is a small 2D runner developed with Godot and C#. Instead of a traditional endless mode, it features 
+handcrafted levels. The goal of the project is to learn and demonstrate the fundamentals of game development with Godot.
 
-Das Spiel kombiniert schnelle, präzise Steuerung in Neon-Look und bietet eine Reihe von vorgefertigten Leveln, die jeweils eigene Herausforderungen und Designideen enthalten.
+The game combines fast, precise controls with a neon aesthetic and offers a series of pre-designed levels, each featuring 
+its own challenges and design ideas.
 
-Dieses Projekt dient außerdem als Devlog, um den Entwicklungsprozess transparent zu machen und Einblicke in die Entwicklung eines kleinen, aber vollständigen Spiels zu geben.
+This project also serves as a devlog to make the development process transparent and provide insights into creating a 
+small but complete game.
 
 ### Namenskonventionen
 
