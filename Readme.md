@@ -28,10 +28,10 @@ small but complete game.
 
 Welcome to the development diary of Neon Dash Trail! Here, I regularly document progress, challenges, and exciting insights.
 
-### Version 0.4 – Der Dash (2025-07-07)
+### Version 0.4 – The Dash (2025-07-07)
 
-- State machine zur einfacheren Erweiterung von Runner-States implementiert
-- Runner kann jetzt auf Tastendruck dashen
+- Implemented a state machine for easier extension of runner states
+- Runner can now dash on key press
 
 ### Version 0.3 – Erste Levelstrukturen (2025-07-06)
 
