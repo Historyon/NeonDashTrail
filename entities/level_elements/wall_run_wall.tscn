@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://vjv78mrffll4"]
+
+[ext_resource type="Script" uid="uid://brjg1qt4tlbsm" path="res://entities/level_elements/WallRunWall.cs" id="1_j6n4u"]
+[ext_resource type="Texture2D" uid="uid://cx6ahh4564cvq" path="res://assets/wallrun_wall.png" id="2_j6n4u"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j6n4u"]
+size = Vector2(16, 16)
+
+[node name="WallRunWall" type="Area2D" node_paths=PackedStringArray("CollisionShape", "Sprite")]
+script = ExtResource("1_j6n4u")
+CollisionShape = NodePath("CollisionShape2D")
+Sprite = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_repeat = 2
+texture = ExtResource("2_j6n4u")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_j6n4u")
+debug_color = Color(0.297717, 0.62868, 1.92523e-07, 0.42)
