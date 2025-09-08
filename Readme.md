@@ -33,38 +33,38 @@ Welcome to the development diary of Neon Dash Trail! Here, I regularly document 
 - Implemented a state machine for easier extension of runner states
 - Runner can now dash on key press
 
-### Version 0.3 – Erste Levelstrukturen (2025-07-06)
+### Version 0.3 – First Level Structures (2025-07-06)
 
-- Checkpoints zu denen der Runner bewegt werden kann
-- Checkpoints werden automatisch vom Runner beim Vorbeilaufen aktiviert
-- Der Runner kann per Tastendruck oder bei einer Kollision in ein Hindernis, zu einem Checkpoint zurückgesetzt werden
-- Beim Erreichen des Ziels wird das Hauptmenü angezeigt
-- Beim Betreten des JumpingPads wird ein höherer Sprung ausgeführt
+- Checkpoints to which the runner can be moved
+- Checkpoints are automatically activated when the runner passes by
+- The runner can be reset to a checkpoint by pressing a key or upon colliding with an obstacle
+- When reaching the goal, the main menu is displayed
+- Entering the JumpingPad triggers a higher jump
 
 ![Version 03 animation](docs/gifs/version_03.gif)
 
-### Version 0.2 – Menüs (2025-07-03)
+### Version 0.2 – Menus (2025-07-03)
 
-- Haupt- und Pausenmenü implementiert
-- Spieler können während des Spiels pausieren
-- Kommunikation mithilfe Connectors zwischen entlegenen Nodes
+- Main and pause menu implemented
+-Players can pause the game during gameplay
+- Communication via connectors between distant nodes
 
 ### Version 0.1 – Start (2025-07-02)
 
-- Projekt initialisiert mit Godot 4.4
-- Erste Spielfigur und Bewegung implementiert
-- Einfaches Level mit Grundmechaniken (Laufen, Springen, Hindernisse) angelegt
+- Project initialized with Godot 4.4
+- First player character and movement implemented
+- Simple level created with basic mechanics (running, jumping, obstacles)
 
 ![Version 01 animation](docs/gifs/version_01.gif)
 
 ---
 
-Vielen Dank fürs Lesen – Jonas 👋🏻
+Thank you for reading – Jonas 👋🏻
 
 ## Assets & Quellen
 
-### Soundeffekte
+### Sound effects
 
-👉🏻 [Detaillierte Auflistung](docs/sources/audio_sources.md)
+👉🏻 [Detailed listing](docs/sources/audio_sources.md)
 
-- Diverse Soundeffekte von [Kenney.nl](https://kenney.nl/) (Public Domain, CC0)
+- Various sound effects from [Kenney.nl](https://kenney.nl/) (Public Domain, CC0)
