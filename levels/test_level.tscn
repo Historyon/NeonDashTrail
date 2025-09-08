@@ -31,5 +31,6 @@ position = Vector2(280, 56)
 position = Vector2(568, -8)
 
 [node name="WallRunWall" parent="." instance=ExtResource("5_o6mel")]
-position = Vector2(448, 24)
-LengthInTiles = 14
+position = Vector2(344, 8)
+LengthInTiles = 15
+HeightInTiles = 2
