@@ -22,6 +22,12 @@ public partial class RunnerStateDashing : RunnerStateBase
         DashTimer.Start();
     }
 
+    public override void HandleProcess(float delta)
+    {
+        if (Runner.IsWallRunPossible && Input.IsActionJustPressed(Controls.Dash))
+            StateMachine.TransitionTo(RunnerState.WallRunning);
+    }
+
     public override void Exit()
     {
         DashTimer.Stop();

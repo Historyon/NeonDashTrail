@@ -3,7 +3,6 @@ namespace NeonDashTrail.states.runner_states;
 [GlobalClass]
 public partial class RunnerStateFalling : RunnerStateBase
 {
-    [Export] public Timer DashLockTimer { get; set; }
     
     public override RunnerState State => RunnerState.Falling;
 
@@ -15,8 +14,14 @@ public partial class RunnerStateFalling : RunnerStateBase
         
         if (Runner.IsOnFloor())
             StateMachine.TransitionTo(RunnerState.Running);
+            
+        if (Input.IsActionJustPressed(Controls.Dash) && Runner.IsWallRunPossible)
+        {
+            StateMachine.TransitionTo(RunnerState.WallRunning);
+            return;
+        }
 
-        if (Input.IsActionJustPressed(Controls.Dash) && Runner.IsDashPossible) 
+        if (Input.IsActionJustPressed(Controls.Dash) && Runner.IsDashPossible)
             StateMachine.TransitionTo(RunnerState.Dashing);
     }
 }

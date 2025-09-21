@@ -19,9 +19,12 @@ public partial class Runner : CharacterBody2D, IJumpableObject
     [Export] public Timer DashLockTimer { get; set; }
 
     private int _lastReachedCheckpointNumber;
-    
+
     public bool DashResetRequired { get; set; }
     public bool IsDashPossible => DashLockTimer.TimeLeft <= 0 && !DashResetRequired;
+    public bool IsWallRunPossible => _isPlayerOnRunnableWall;
+
+    private bool _isPlayerOnRunnableWall;
 
     public override void _Ready()
     {
@@ -34,13 +37,13 @@ public partial class Runner : CharacterBody2D, IJumpableObject
     {
         if (@event.IsActionPressed(Controls.Pause))
             GameEventsConnectorService.RaisePauseGameEvent();
-        
+
         if (@event.IsActionPressed(Controls.Reset))
         {
             LevelEventsConnectorService.RaiseResetToCheckpointEvent();
             StateMachine.TransitionTo(RunnerState.Running);
         }
-        
+
         StateMachine?.Input(@event);
     }
 
@@ -50,7 +53,7 @@ public partial class Runner : CharacterBody2D, IJumpableObject
         MoveAndSlide();
         HandleCollisions();
     }
-    
+
     public void StartRun()
     {
         SetPhysicsProcess(true);
@@ -76,7 +79,7 @@ public partial class Runner : CharacterBody2D, IJumpableObject
             GoalReached();
             return;
         }
-        
+
         CheckForCheckpoint();
 
         if (CollisionWithObstacle())
@@ -96,7 +99,7 @@ public partial class Runner : CharacterBody2D, IJumpableObject
     private bool CollisionWithObstacle()
     {
         var slideCollisionCount = GetSlideCollisionCount();
-        
+
         if (slideCollisionCount == 0) return false;
 
         for (var i = 0; i < slideCollisionCount; i++)
@@ -105,13 +108,13 @@ public partial class Runner : CharacterBody2D, IJumpableObject
 
             var collisionNormal = collision.GetNormal();
 
-            if (collisionNormal.X < Constants.MinFrontalCollisionNormalX && 
+            if (collisionNormal.X < Constants.MinFrontalCollisionNormalX &&
                 Mathf.Abs(collisionNormal.Y) < Constants.MaxFrontalCollisionNormalYAbsolute)
             {
                 return true;
             }
         }
-        
+
         return false;
     }
 
@@ -120,7 +123,7 @@ public partial class Runner : CharacterBody2D, IJumpableObject
         if (!CheckpointGoalRayCast.IsColliding() ||
             CheckpointGoalRayCast.GetCollider() is not Checkpoint checkpoint ||
             checkpoint.CheckpointNumber == _lastReachedCheckpointNumber) return;
-        
+
         _lastReachedCheckpointNumber = checkpoint.CheckpointNumber;
         LevelEventsConnectorService.RaiseCheckpointReachedEvent(checkpoint.CheckpointNumber);
         CheckpointAudio.Play();
@@ -132,5 +135,15 @@ public partial class Runner : CharacterBody2D, IJumpableObject
     {
         StopRun();
         LevelEventsConnectorService.RaiseGoalReachedEvent();
+    }
+
+    private void OnWallRunWallDetected(bool entered)
+    {
+        _isPlayerOnRunnableWall = entered;
+    }
+
+    private void OnStateChanged(RunnerState fromState, RunnerState toState)
+    {
+        
     }
 }

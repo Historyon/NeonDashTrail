@@ -12,6 +12,7 @@ Runner = NodePath("Runner")
 metadata/_custom_type_script = "uid://bow20bqnms1j2"
 
 [node name="Runner" parent="." instance=ExtResource("1_46lwt")]
+z_index = 1
 position = Vector2(16, 134)
 
 [node name="Camera2D" type="Camera2D" parent="Runner"]
@@ -34,3 +35,15 @@ position = Vector2(568, -8)
 position = Vector2(344, 8)
 LengthInTiles = 15
 HeightInTiles = 2
+
+[node name="WallRunWall2" parent="." instance=ExtResource("5_o6mel")]
+position = Vector2(408, -40)
+LengthInTiles = 5
+
+[node name="WallRunWall3" parent="." instance=ExtResource("5_o6mel")]
+position = Vector2(504, -72)
+LengthInTiles = 5
+
+[node name="WallRunWall4" parent="." instance=ExtResource("5_o6mel")]
+position = Vector2(616, -96)
+LengthInTiles = 5

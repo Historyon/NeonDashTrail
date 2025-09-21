@@ -1,14 +1,16 @@
-[gd_scene load_steps=12 format=3 uid="uid://bgfc57g2t35e2"]
+[gd_scene load_steps=15 format=3 uid="uid://bgfc57g2t35e2"]
 
 [ext_resource type="Script" uid="uid://da4pibqy2pa5w" path="res://entities/Runner.cs" id="1_r2fxw"]
 [ext_resource type="Texture2D" uid="uid://cexayt18l3gxn" path="res://assets/sprites.png" id="2_r2fxw"]
 [ext_resource type="AudioStream" uid="uid://nyh7jlco020t" path="res://assets/audio/zap1.ogg" id="3_gude8"]
+[ext_resource type="PackedScene" uid="uid://b4xis83bc2v6b" path="res://components/player_scanner_component.tscn" id="4_cg8b6"]
 [ext_resource type="PackedScene" uid="uid://btx25uv01pqki" path="res://states/runner_states/runner_state_machine.tscn" id="4_ek3a7"]
 [ext_resource type="Script" uid="uid://f4mfeaacv7ei" path="res://states/runner_states/RunnerStateRunning.cs" id="5_x64ep"]
 [ext_resource type="Script" uid="uid://ddgtoy4ain6v7" path="res://states/runner_states/RunnerStateFalling.cs" id="6_yf7cc"]
 [ext_resource type="Script" uid="uid://siak1h637s2u" path="res://states/runner_states/RunnerStateJumping.cs" id="7_cg8b6"]
 [ext_resource type="Script" uid="uid://cwpdp8n54madw" path="res://states/runner_states/RunnerStateDashing.cs" id="8_x64ep"]
 [ext_resource type="AudioStream" uid="uid://h46b6m63iybp" path="res://assets/audio/cloth3.ogg" id="9_yf7cc"]
+[ext_resource type="Script" uid="uid://calffjis7hfwy" path="res://states/runner_states/RunnerStateWallRunning.cs" id="11_xrwpi"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gude8"]
 atlas = ExtResource("2_r2fxw")
@@ -17,6 +19,10 @@ region = Rect2(64, 0, 16, 16)
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r2fxw"]
 radius = 5.0
 height = 16.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_xrwpi"]
+radius = 7.0
+height = 20.0
 
 [node name="Runner" type="CharacterBody2D" node_paths=PackedStringArray("CheckpointGoalRayCast", "CheckpointAudio", "StateMachine", "DashLockTimer")]
 collision_layer = 2
@@ -44,6 +50,12 @@ area_mask = 0
 [node name="DashLockTimer" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true
+
+[node name="PlayerScannerComponent" parent="." instance=ExtResource("4_cg8b6")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerScannerComponent"]
+shape = SubResource("CapsuleShape2D_xrwpi")
+debug_color = Color(0.634765, 0.527456, 0, 0.42)
 
 [node name="RunnerStateMachine" parent="." node_paths=PackedStringArray("Runner") instance=ExtResource("4_ek3a7")]
 InitialState = 1
@@ -74,4 +86,10 @@ stream = ExtResource("9_yf7cc")
 volume_db = 1.0
 pitch_scale = 2.07
 
+[node name="RunnerStateWallRunning" type="Node" parent="RunnerStateMachine" node_paths=PackedStringArray("DashLockTimer")]
+script = ExtResource("11_xrwpi")
+DashLockTimer = NodePath("../../DashLockTimer")
+metadata/_custom_type_script = "uid://calffjis7hfwy"
+
+[connection signal="WallRunWallDetected" from="PlayerScannerComponent" to="." method="OnWallRunWallDetected"]
 [connection signal="timeout" from="RunnerStateMachine/RunnerStateDashing/DashTimer" to="RunnerStateMachine/RunnerStateDashing" method="OnDashTimerTimeout"]

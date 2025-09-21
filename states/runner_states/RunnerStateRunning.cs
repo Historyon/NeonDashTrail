@@ -25,6 +25,12 @@ public partial class RunnerStateRunning : RunnerStateBase
             return;
         }
 
+        if (Input.IsActionJustPressed(Controls.Dash) && Runner.IsWallRunPossible)
+        {
+            StateMachine.TransitionTo(RunnerState.WallRunning);
+            return;
+        }
+
         if (Input.IsActionJustPressed(Controls.Dash) && Runner.IsDashPossible)
         {
             StateMachine.TransitionTo(RunnerState.Dashing);
