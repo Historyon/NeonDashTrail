@@ -9,6 +9,7 @@ namespace NeonDashTrail.entities;
 public partial class Runner : CharacterBody2D, IJumpableObject
 {
     [Export] public float Speed { get; set; } = 100.0f;
+    [Export] public float WallRunSpeed { get; set; } = 150.0f;
     [Export] public float Gravity { get; set; } = 800.0f;
     [Export] public float JumpForce { get; set; } = 250.0f;
     [Export] public RayCast2D CheckpointGoalRayCast { get; set; }

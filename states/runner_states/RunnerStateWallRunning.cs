@@ -34,6 +34,6 @@ public partial class RunnerStateWallRunning : RunnerStateBase
             return;
         }
 
-        Runner.Velocity = new Vector2(Runner.Speed, 0f);
+        Runner.Velocity = new Vector2(Runner.WallRunSpeed, 0f);
     }
 }
