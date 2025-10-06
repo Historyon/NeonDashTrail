@@ -28,6 +28,11 @@ small but complete game.
 
 Welcome to the development diary of Neon Dash Trail! Here, I regularly document progress, challenges, and exciting insights.
 
+### Version 0.5 - Wall run (2025-10-06)
+
+- Implemented WallRunWalls and wall running functionality
+  - Wall run is possible in all 4 directions
+
 ### Version 0.4 – The Dash (2025-07-07)
 
 - Implemented a state machine for easier extension of runner states
@@ -46,7 +51,7 @@ Welcome to the development diary of Neon Dash Trail! Here, I regularly document 
 ### Version 0.2 – Menus (2025-07-03)
 
 - Main and pause menu implemented
--Players can pause the game during gameplay
+- Players can pause the game during gameplay
 - Communication via connectors between distant nodes
 
 ### Version 0.1 – Start (2025-07-02)
