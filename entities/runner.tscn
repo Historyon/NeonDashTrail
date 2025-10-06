@@ -92,4 +92,5 @@ DashLockTimer = NodePath("../../DashLockTimer")
 metadata/_custom_type_script = "uid://calffjis7hfwy"
 
 [connection signal="WallRunWallDetected" from="PlayerScannerComponent" to="." method="OnWallRunWallDetected"]
+[connection signal="WallRunWallLeave" from="PlayerScannerComponent" to="." method="OnWallRunWallLeave"]
 [connection signal="timeout" from="RunnerStateMachine/RunnerStateDashing/DashTimer" to="RunnerStateMachine/RunnerStateDashing" method="OnDashTimerTimeout"]

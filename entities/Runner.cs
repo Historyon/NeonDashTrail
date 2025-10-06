@@ -1,6 +1,7 @@
 using NeonDashTrail.connectors;
 using NeonDashTrail.entities.level_elements;
 using NeonDashTrail.interfaces;
+using NeonDashTrail.scripts.enums;
 using NeonDashTrail.states.runner_states;
 using NeonDashTrail.states.runner_states.args;
 
@@ -24,6 +25,7 @@ public partial class Runner : CharacterBody2D, IJumpableObject
     public bool DashResetRequired { get; set; }
     public bool IsDashPossible => DashLockTimer.TimeLeft <= 0 && !DashResetRequired;
     public bool IsWallRunPossible => _isPlayerOnRunnableWall;
+    public WallRunDirection WallRunDirection { get; private set; }
 
     private bool _isPlayerOnRunnableWall;
 
@@ -138,13 +140,19 @@ public partial class Runner : CharacterBody2D, IJumpableObject
         LevelEventsConnectorService.RaiseGoalReachedEvent();
     }
 
-    private void OnWallRunWallDetected(bool entered)
+    private void OnWallRunWallDetected(WallRunWall wallRunWall)
     {
-        _isPlayerOnRunnableWall = entered;
+        _isPlayerOnRunnableWall = true;
+        WallRunDirection = wallRunWall.Direction;
+    }
+
+    private void OnWallRunWallLeave(WallRunWall wallRunWall)
+    {
+        _isPlayerOnRunnableWall = false;
     }
 
     private void OnStateChanged(RunnerState fromState, RunnerState toState)
     {
-        
+
     }
 }

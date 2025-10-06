@@ -1,3 +1,4 @@
+using NeonDashTrail.scripts.enums;
 using NeonDashTrail.states;
 using NeonDashTrail.states.runner_states;
 
@@ -34,6 +35,11 @@ public partial class RunnerStateWallRunning : RunnerStateBase
             return;
         }
 
-        Runner.Velocity = new Vector2(Runner.WallRunSpeed, 0f);
+        var velocityX = Runner.WallRunDirection == WallRunDirection.Left ? Runner.WallRunSpeed * -1
+            : Runner.WallRunDirection == WallRunDirection.Right ? Runner.WallRunSpeed : 0f;
+        var velocityY = Runner.WallRunDirection == WallRunDirection.Up ? Runner.WallRunSpeed * -1
+                    : Runner.WallRunDirection == WallRunDirection.Down ? Runner.WallRunSpeed : 0f;
+
+        Runner.Velocity = new Vector2(velocityX, velocityY);
     }
 }

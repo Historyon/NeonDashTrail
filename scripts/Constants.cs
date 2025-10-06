@@ -28,4 +28,5 @@ public static class Controls
     public const string Pause = "pause";
     public const string Reset = "reset";
     public const string Dash = "dash";
+    public const string WallRun = "wall_run";
 }

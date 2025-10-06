@@ -24,7 +24,7 @@ public partial class RunnerStateDashing : RunnerStateBase
 
     public override void HandleProcess(float delta)
     {
-        if (Runner.IsWallRunPossible && Input.IsActionJustPressed(Controls.Dash))
+        if (Runner.IsWallRunPossible && Input.IsActionJustPressed(Controls.WallRun))
             StateMachine.TransitionTo(RunnerState.WallRunning);
     }
 
