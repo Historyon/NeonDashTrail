@@ -12,6 +12,12 @@ texture = ExtResource("1_euxth")
 2:0/0 = 0
 2:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 4:2/0 = 0
+6:0/0 = 0
+6:0/0/custom_data_0 = Vector2(1, 0)
+8:0/0 = 0
+8:0/0/custom_data_0 = Vector2(0, -1)
+6:2/0 = 0
+6:2/0/custom_data_0 = Vector2(0, 1)
 
 [sub_resource type="TileSetScenesCollectionSource" id="TileSetScenesCollectionSource_oscfw"]
 scenes/1/scene = ExtResource("2_euxth")
@@ -19,5 +25,7 @@ scenes/2/scene = ExtResource("3_oscfw")
 
 [resource]
 physics_layer_0/collision_layer = 1
+custom_data_layer_0/name = "wall_run_direction"
+custom_data_layer_0/type = 5
 sources/0 = SubResource("TileSetAtlasSource_2j3g5")
 sources/1 = SubResource("TileSetScenesCollectionSource_oscfw")

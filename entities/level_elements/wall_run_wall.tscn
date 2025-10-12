@@ -1,17 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://vjv78mrffll4"]
+[gd_scene load_steps=3 format=3 uid="uid://bsfts63bdawn"]
 
-[ext_resource type="Script" uid="uid://brjg1qt4tlbsm" path="res://entities/level_elements/WallRunWall.cs" id="1_j6n4u"]
 [ext_resource type="Texture2D" uid="uid://cx6ahh4564cvq" path="res://assets/wallrun_wall.png" id="2_j6n4u"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_j6n4u"]
 size = Vector2(16, 16)
 
-[node name="WallRunWall" type="Area2D" node_paths=PackedStringArray("CollisionShape", "Sprite")]
+[node name="WallRunWall" type="Area2D"]
 collision_layer = 32
 collision_mask = 0
-script = ExtResource("1_j6n4u")
-CollisionShape = NodePath("CollisionShape2D")
-Sprite = NodePath("Sprite2D")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_repeat = 2

@@ -24,13 +24,14 @@ height = 16.0
 radius = 7.0
 height = 20.0
 
-[node name="Runner" type="CharacterBody2D" node_paths=PackedStringArray("CheckpointGoalRayCast", "CheckpointAudio", "StateMachine", "DashLockTimer")]
+[node name="Runner" type="CharacterBody2D" node_paths=PackedStringArray("CheckpointGoalRayCast", "CheckpointAudio", "StateMachine", "DashLockTimer", "PlayerScanner")]
 collision_layer = 2
 script = ExtResource("1_r2fxw")
 CheckpointGoalRayCast = NodePath("CheckpointGoalRayCast")
 CheckpointAudio = NodePath("CheckpointAudio")
 StateMachine = NodePath("RunnerStateMachine")
 DashLockTimer = NodePath("DashLockTimer")
+PlayerScanner = NodePath("PlayerScannerComponent")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = SubResource("AtlasTexture_gude8")
@@ -57,9 +58,10 @@ one_shot = true
 shape = SubResource("CapsuleShape2D_xrwpi")
 debug_color = Color(0.634765, 0.527456, 0, 0.42)
 
-[node name="RunnerStateMachine" parent="." node_paths=PackedStringArray("Runner") instance=ExtResource("4_ek3a7")]
+[node name="RunnerStateMachine" parent="." node_paths=PackedStringArray("Runner", "PlayerScanner") instance=ExtResource("4_ek3a7")]
 InitialState = 1
 Runner = NodePath("..")
+PlayerScanner = NodePath("../PlayerScannerComponent")
 
 [node name="RunnerStateRunning" type="Node" parent="RunnerStateMachine"]
 script = ExtResource("5_x64ep")
@@ -91,6 +93,4 @@ script = ExtResource("11_xrwpi")
 DashLockTimer = NodePath("../../DashLockTimer")
 metadata/_custom_type_script = "uid://calffjis7hfwy"
 
-[connection signal="WallRunWallDetected" from="PlayerScannerComponent" to="." method="OnWallRunWallDetected"]
-[connection signal="WallRunWallLeave" from="PlayerScannerComponent" to="." method="OnWallRunWallLeave"]
 [connection signal="timeout" from="RunnerStateMachine/RunnerStateDashing/DashTimer" to="RunnerStateMachine/RunnerStateDashing" method="OnDashTimerTimeout"]

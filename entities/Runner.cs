@@ -1,7 +1,7 @@
+using NeonDashTrail.components;
 using NeonDashTrail.connectors;
 using NeonDashTrail.entities.level_elements;
 using NeonDashTrail.interfaces;
-using NeonDashTrail.scripts.enums;
 using NeonDashTrail.states.runner_states;
 using NeonDashTrail.states.runner_states.args;
 
@@ -19,15 +19,12 @@ public partial class Runner : CharacterBody2D, IJumpableObject
     [Export, ExportCategory("Dash")] public float DashForce { get; set; } = 300.0f;
     [Export] public float DashDuration { get; set; } = 0.2f;
     [Export] public Timer DashLockTimer { get; set; }
+    [Export] public PlayerScannerComponent PlayerScanner { get; set; }
 
     private int _lastReachedCheckpointNumber;
 
     public bool DashResetRequired { get; set; }
     public bool IsDashPossible => DashLockTimer.TimeLeft <= 0 && !DashResetRequired;
-    public bool IsWallRunPossible => _isPlayerOnRunnableWall;
-    public WallRunDirection WallRunDirection { get; private set; }
-
-    private bool _isPlayerOnRunnableWall;
 
     public override void _Ready()
     {
@@ -52,6 +49,7 @@ public partial class Runner : CharacterBody2D, IJumpableObject
 
     public override void _PhysicsProcess(double delta)
     {
+        PlayerScanner.ScanArea();
         StateMachine?.Process((float)delta);
         MoveAndSlide();
         HandleCollisions();
@@ -60,13 +58,11 @@ public partial class Runner : CharacterBody2D, IJumpableObject
     public void StartRun()
     {
         SetPhysicsProcess(true);
-        StateMachine.SetPhysicsProcess(true);
     }
 
     public void StopRun()
     {
         SetPhysicsProcess(false);
-        StateMachine.SetPhysicsProcess(false);
     }
 
     public void AddJumpForce(float jumpForce)
@@ -138,17 +134,6 @@ public partial class Runner : CharacterBody2D, IJumpableObject
     {
         StopRun();
         LevelEventsConnectorService.RaiseGoalReachedEvent();
-    }
-
-    private void OnWallRunWallDetected(WallRunWall wallRunWall)
-    {
-        _isPlayerOnRunnableWall = true;
-        WallRunDirection = wallRunWall.Direction;
-    }
-
-    private void OnWallRunWallLeave(WallRunWall wallRunWall)
-    {
-        _isPlayerOnRunnableWall = false;
     }
 
     private void OnStateChanged(RunnerState fromState, RunnerState toState)

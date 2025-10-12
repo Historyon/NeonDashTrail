@@ -30,3 +30,16 @@ public static class Controls
     public const string Dash = "dash";
     public const string WallRun = "wall_run";
 }
+
+public static class TileMapDataLayers
+{
+    /// <summary>
+    /// Returns a <see cref="Vector2"/> to indicate the wall run direction
+    /// </summary>
+    public const string WallRunDirection = "wall_run_direction";
+}
+
+public static class DebugErrorMessages
+{
+    public const string NodeNotFound = "Node of type {0} not found.";
+}

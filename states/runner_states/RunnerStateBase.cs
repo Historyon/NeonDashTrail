@@ -1,3 +1,4 @@
+using NeonDashTrail.components;
 using NeonDashTrail.entities;
 
 namespace NeonDashTrail.states.runner_states;
@@ -7,13 +8,15 @@ public partial class RunnerStateBase : Node
 {
     protected RunnerStateMachine StateMachine;
     protected Runner Runner;
+    protected PlayerScannerComponent PlayerScanner { get; set; }
 
     public virtual RunnerState State => RunnerState.None;
 
-    public void Init(RunnerStateMachine stateMachine, Runner runner)
+    public void Init(RunnerStateMachine stateMachine, Runner runner, PlayerScannerComponent playerScanner)
     {
         StateMachine = stateMachine;
         Runner = runner;
+        PlayerScanner = playerScanner;
         AfterInit();
     }
 

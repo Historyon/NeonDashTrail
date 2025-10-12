@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using NeonDashTrail.components;
 using NeonDashTrail.entities;
 
 namespace NeonDashTrail.states.runner_states;
@@ -7,6 +8,7 @@ public partial class RunnerStateMachine : Node
 {
     [Export] public RunnerState InitialState { get; set; }
     [Export] public Runner Runner { get; set; }
+    [Export] public PlayerScannerComponent PlayerScanner { get; set; }
 
     [Signal] public delegate void StateChangedEventHandler(RunnerState fromState, RunnerState toState);
 
@@ -21,7 +23,7 @@ public partial class RunnerStateMachine : Node
         {
             if (child is RunnerStateBase state)
             {   
-                state.Init(this, Runner);
+                state.Init(this, Runner, PlayerScanner);
                 _states.Add(state.State, state);
             }
         }

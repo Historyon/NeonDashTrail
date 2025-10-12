@@ -1,19 +1,45 @@
-using NeonDashTrail.entities.level_elements;
+using NeonDashTrail.levels;
 
 namespace NeonDashTrail.components;
 
 public partial class PlayerScannerComponent : Area2D
 {
-    [Signal] public delegate void WallRunWallDetectedEventHandler(WallRunWall wallRunWall);
-    [Signal] public delegate void WallRunWallLeaveEventHandler(WallRunWall wallRunWall);
+    [Signal] public delegate void WallRunDirectionChangedEventHandler();
 
-    private void OnAreaEntered(Area2D area)
+    public bool IsWallRunPossible { get; private set; }
+    public Vector2 WallRunDirection { get; private set; }
+
+    private TileMapLayer _environmentLayer { get; set; }
+
+
+    public override void _Ready()
     {
-        if (area is WallRunWall wallRunWall) EmitSignalWallRunWallDetected(wallRunWall);
+        _environmentLayer = Searchers.FindParentOfType<LevelBase>(this).EnvironmentTiles;
     }
 
-    private void OnAreaExited(Area2D area)
+
+    public void ScanArea()
     {
-        if (area is WallRunWall wallRunWall) EmitSignalWallRunWallLeave(wallRunWall);
+        var cell = _environmentLayer.LocalToMap(GlobalPosition);
+        var data = _environmentLayer.GetCellTileData(cell);
+
+        if (data is null)
+        {
+            IsWallRunPossible = false;
+            return;
+        }
+
+        IsWallRunPossible = data.HasCustomData(TileMapDataLayers.WallRunDirection);
+
+        if (IsWallRunPossible) 
+            ProceedWallRunData(data.GetCustomData(TileMapDataLayers.WallRunDirection).AsVector2());
+    }
+
+    private void ProceedWallRunData(Vector2 wallRunDirection)
+    {
+        if (WallRunDirection != wallRunDirection)
+            EmitSignalWallRunDirectionChanged();
+
+        WallRunDirection = wallRunDirection;
     }
 }

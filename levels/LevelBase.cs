@@ -9,6 +9,7 @@ namespace NeonDashTrail.levels;
 public partial class LevelBase : Node2D, ILevel
 {
     [Export] public Runner Runner { get; set; }
+    [Export] public TileMapLayer EnvironmentTiles { get; set; }
     
     private Checkpoint[] _startPositions = [];
 
