@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://b4xis83bc2v6b"]
+
+[ext_resource type="Script" uid="uid://cf4pauu7102al" path="res://components/PlayerScannerComponent.cs" id="1_23xxd"]
+
+[node name="PlayerScannerComponent" type="Area2D"]
+collision_layer = 0
+collision_mask = 32
+script = ExtResource("1_23xxd")

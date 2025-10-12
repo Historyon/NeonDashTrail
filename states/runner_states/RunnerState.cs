@@ -6,5 +6,6 @@ public enum RunnerState
     Running,
     Falling,
     Jumping,
-    Dashing
+    Dashing,
+    WallRunning
 }

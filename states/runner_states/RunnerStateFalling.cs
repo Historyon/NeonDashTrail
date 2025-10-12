@@ -9,12 +9,19 @@ public partial class RunnerStateFalling : RunnerStateBase
     {
         var velocity = Runner.Velocity;
         velocity.Y += Runner.Gravity * delta;
+        velocity.X = Runner.Speed;
         Runner.Velocity = velocity;
         
         if (Runner.IsOnFloor())
             StateMachine.TransitionTo(RunnerState.Running);
+            
+        if (Input.IsActionJustPressed(Controls.WallRun) && PlayerScanner.IsWallRunPossible)
+        {
+            StateMachine.TransitionTo(RunnerState.WallRunning);
+            return;   
+        }
 
-        if (Input.IsActionJustPressed(Controls.Dash)) 
+        if (Input.IsActionJustPressed(Controls.Dash) && Runner.IsDashPossible)
             StateMachine.TransitionTo(RunnerState.Dashing);
     }
 }
